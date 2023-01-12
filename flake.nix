@@ -31,7 +31,7 @@
         '';
       });
     }) // {
-
+    ansibleGenerateCollection = final.callPackage ./ansible.nix {};
     overlay = final: prev: {
       ansible2nix = final.poetry2nix.mkPoetryApplication {
         projectDir = ./.;
