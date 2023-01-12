@@ -24,14 +24,14 @@
       };
 
       defaultPackage = self.packages.${system}.ansible2nix;
-
+      ansibleGenerateCollection = pkgs.callPackage ./ansible.nix {};
       devShell = self.defaultPackage.${system}.overrideAttrs(oa: {
         postShellHook = ''
           export PYTHONPATH="$PWD:$PYTHONPATH"
         '';
       });
     }) // {
-    ansibleGenerateCollection = pkgs.callPackage ./ansible.nix {};
+    
     overlay = final: prev: {
       ansible2nix = final.poetry2nix.mkPoetryApplication {
         projectDir = ./.;
